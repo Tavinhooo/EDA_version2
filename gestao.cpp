@@ -48,6 +48,7 @@ void vendaManual(seccao* &armazem, int numero_de_seccoes, int &total_de_faturaca
     }
     cin.clear();
 }
+
 //3.2
 void promocao(seccao *&armazem,int &numero_de_seccoes,char &id_seccao_desconto,int &duracao,int &desconto) {
     bool seccao_encontrada = false;
@@ -87,42 +88,40 @@ void reseta_seccao(seccao seccao_do_armazem){
 }
 
 void alterar_categoria(seccao *&armazem, int &numero_de_seccoes) {
-    cout<<"Qual seccao pertende alterar?" << endl;
-    char id_local;
-    cin >> id_local;
-    bool seccao_encontrada = false;
-    for (int i = 0; i < numero_de_seccoes; i++) {
-        if (armazem[i].ID == id_local) {
-            cout << "Nova categoria para a seccao " << id_local << ": " << endl;
-            string nova_categoria;
-            cin >> nova_categoria;
-            armazem[i].categoria = nova_categoria;
-            reseta_seccao(armazem[i]);
-            armazem[i].quantidade_na_seccao = 0;
-            seccao_encontrada = true;
+    cout << "Qual seccao pertende alterar?" << endl;//pergunta ao utilizador qual a seccao que pertende alterar
+    char id_local;//variavel para indentificar qual seccao
+    cin >> id_local;//valor atribuido
+    bool seccao_encontrada = false;//variavel para indicar se foi encontrada seccao ou nao
+    for (int i = 0; i < numero_de_seccoes; i++) {//for para percorer seccao do array armazem
+        if (armazem[i].ID == id_local) {//if para verificar se a seccao existe
+            cout << "Nova categoria para a seccao " << id_local << ": "
+                 << endl;//pergunta ao utilizador qual a nova categoria
+            string nova_categoria;//variavel para nova categoria
+            cin >> nova_categoria;//valor atribuido a variavel
+            armazem[i].categoria = nova_categoria;//alterar a categoria
+            reseta_seccao(armazem[i]);//chamar a funcao reseta_seccao
+            armazem[i].quantidade_na_seccao = 0;//atribuir o tamanho da seccao a 0
+            seccao_encontrada = true;//seccao encontrada
             break;
         }
-    }
-    if (!seccao_encontrada) {
-        cout << "A seccao selecionada nao existe!" << endl;
     }
 }
 //3.4
 void adicionar_seccao( int &numero_de_seccoes, seccao *&armazem) {
-    char ID;
-    string categoria;
-    int capacidade;
-    cout<<"Id para nova seccao:"<<endl;
-    cin>>ID;
-    cin.ignore();
-    cout<<"Categoria para nova seccao:"<<endl;
-    getline(cin, categoria);
-    cout<<"Capacidade para nova seccao:"<<endl;
-    cin>>capacidade;
-    cin.ignore();
-    numero_de_seccoes=numero_de_seccoes + 1;
-    seccao *novo_armazem = new seccao[numero_de_seccoes];
-    for(int i =0;i<numero_de_seccoes-1;i++){
+    char ID;//variavel para ID da seccao
+    string categoria;//variavel para categoria
+    int capacidade;//variavel para capacidade
+    cout<<"ID para nova seccao:"<<endl;//pergunta o ID ao usuario
+    cin>>ID;//atribui valor a variavel
+    cout<<"categoria para nova seccao:"<<endl;//pergunta a categoria ao usuario
+    cin.ignore();//limpar o buffer do cin
+    getline(cin, categoria);//atribui valor a variavel
+    cout<<"capacidade para nova seccao:"<<endl;//pergunta a capacidade ao usuario
+    cin>>capacidade;//atribui valor para variavel
+    cin.ignore();//limpar o buffer do cin
+    numero_de_seccoes=numero_de_seccoes + 1;//adiciona uma seccao
+    seccao *novo_armazem = new seccao[numero_de_seccoes];//cria um novo array
+    for(int i =0;i<numero_de_seccoes-1;i++){//for para percorrer o array)
         novo_armazem[i].ID=armazem[i].ID;
         novo_armazem[i].categoria=armazem[i].categoria;
         novo_armazem[i].tamanho_da_seccao=armazem[i].tamanho_da_seccao;
@@ -130,12 +129,12 @@ void adicionar_seccao( int &numero_de_seccoes, seccao *&armazem) {
         novo_armazem[i].faturacao_desta_seccao=armazem[i].faturacao_desta_seccao;
         novo_armazem[i].numeros_de_serie_vendidos_aqui=armazem[i].numeros_de_serie_vendidos_aqui;
         novo_armazem[i].pecas_aqui=armazem[i].pecas_aqui;
-    }
-    armazem=novo_armazem;
-    armazem[numero_de_seccoes-1].ID=ID;
-    armazem[numero_de_seccoes-1].categoria=categoria;
-    armazem[numero_de_seccoes-1].tamanho_da_seccao=capacidade;
-    armazem[numero_de_seccoes-1].pecas_aqui= new peca[capacidade];
+    }//funçao para copiar o array
+    armazem=novo_armazem;//o array armazem torna-se o novo_armazem
+    armazem[numero_de_seccoes-1].ID=ID;//atribuir o novo ID para ultima posicao do array
+    armazem[numero_de_seccoes-1].categoria=categoria;//atribuir a categoria para ultima posicao do array
+    armazem[numero_de_seccoes-1].tamanho_da_seccao=capacidade;//atribuir a capacidade para ultima posicao do array
+    armazem[numero_de_seccoes-1].pecas_aqui= new peca[capacidade];//novo array para a seccao
 }
 
 //3.5
@@ -223,7 +222,7 @@ void imprimir_lista_pecas_preco(seccao* seccoes, int numero_seccoes, peca* lista
         tamanho_total += seccoes[i].quantidade_na_seccao;
     }
     tamanho_total += tamanho_lista_chegada;
-    peca* todas_pecas = new peca[tamanho_total];
+    peca *todas_pecas = new peca[tamanho_total];
     int index = 0;
     for (int i = 0; i < numero_seccoes; ++i) {
         for (int j = 0; j < seccoes[i].quantidade_na_seccao; ++j) {
@@ -233,12 +232,13 @@ void imprimir_lista_pecas_preco(seccao* seccoes, int numero_seccoes, peca* lista
     for (int i = 0; i < tamanho_lista_chegada; ++i) {
         todas_pecas[index++] = lista_chegada[i];
     }
-    sort(todas_pecas, todas_pecas + tamanho_total, [](const peca& p1, const peca& p2) {
+    sort(todas_pecas, todas_pecas + tamanho_total, [](const peca &p1, const peca &p2) {
         return p1.preco < p2.preco;
     });
     cout << "Lista de todas as pecas presentes no armazem, seccoes e lista de chegada (por precos):" << endl;
     for (int i = 0; i < tamanho_total; ++i) {
-        cout << "- Marca: " << todas_pecas[i].marca << " | Categoria: " << todas_pecas[i].categoria << " | Preco: " << todas_pecas[i].preco << endl;
+        cout << "- Marca: " << todas_pecas[i].marca << " | Categoria: " << todas_pecas[i].categoria << " | Preco: "
+             << todas_pecas[i].preco << endl;
     }
     delete[] todas_pecas;
 }

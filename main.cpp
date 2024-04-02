@@ -13,7 +13,7 @@
 
 using namespace std;
 int main() {
-    srand(time(0));
+    srand(time(0)); //
     int numero_de_seccoes = 0 , tamanho_dos_numeros_saidos = 0, tamanho_lista_chegada = 0,total_de_faturacao = 0;
     static int chamadas_do_menu = 0; //quantas chamadas do menu existiram
     criacao_de_numero_de_seccoes(numero_de_seccoes);

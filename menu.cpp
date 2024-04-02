@@ -48,8 +48,9 @@ int menu(seccao *&armazem,int &numero_de_seccoes,peca *&lista_chegada,int &taman
             cout << "(4).Adicionar Seccao\n";
             cout << "(5).Gravar Armazem\n";
             cout << "(6).Carregar Armazem\n";
-            cout << "(7).Imprimir Armazem\n";
-            cout << "(8).Fechar Armazem\n";
+            cout << "(7).Imprimir Armazem por ordem alfabetica da marca da peca\n";
+            cout << "(8).Imprimir Armazem por preco\n";
+            cout << "(9).Fechar Armazem\n";
             cout << "Selecione a sua opcao:";
             cin >> opcao;
             switch (opcao) {
@@ -77,17 +78,22 @@ int menu(seccao *&armazem,int &numero_de_seccoes,peca *&lista_chegada,int &taman
                     adicionar_seccao(numero_de_seccoes, armazem);
                     break;
                 case 5:
-                    cout << "A gravar...\n";
-
+                    cout << "A gravar...\n"<< endl;
                     gravar_armazem(armazem, numero_de_seccoes, lista_chegada, tamanho_lista_chegada, chamadas_do_menu, total_de_faturacao, numeros_saidos,tamanho_dos_numeros_saidos);
+                    cout << "Gravacao completa \n" <<endl;
                     break;
                 case 6:
                     cout << "A carregar...\n";
                     break;
                 case 7:
                     cout << "A imprimir...\n";
+                    imprimir_lista_pecas(armazem, numero_de_seccoes,lista_chegada,tamanho_lista_chegada);
                     break;
                 case 8:
+                    cout << "A imprimir...\n";
+                    imprimir_lista_pecas_preco(armazem, numero_de_seccoes,lista_chegada,tamanho_lista_chegada);
+                    break;
+                case 9:
                     cout << "A fechar armazem\n";
                     sair = 1;
                     break;
