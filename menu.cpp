@@ -39,7 +39,7 @@ int menu(seccao *&armazem,int &numero_de_seccoes,peca *&lista_chegada,int &taman
             return 0;
         } else if (dia_seguinte_ou_gestão == 'g') {
             cout
-                    << "\t*******************************************\n\t***** Armazem EDA | Total Faturacao 0 *****\n\t*******************************************";
+                    << "\t*******************************************\n\t***** Armazem EDA | Total Faturacao "<<total_de_faturacao <<" *****\n\t*******************************************";
             int opcao;
             cout << "\n ***** Bem Vindo Gestor *****\n";
             cout << "(1).Venda Manual\n";
