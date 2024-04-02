@@ -65,7 +65,7 @@ void inserir_peca_ordenada(peca *&lista_chegada,int &tamanho_da_lista_de_chegada
     }
     delete[] auxiliar;
 }
-void deposito_de_pecas_na_lista_de_chegada(peca *lista_chegada,int quantidade_de_pecas, int &numero_de_seccoes, seccao * armazem,int* &numeros_saidos,int &tamanho_dos_numeros_saidos,int &tamanho_da_lista_de_chegada){
+void deposito_de_pecas_na_lista_de_chegada(peca *&lista_chegada,int quantidade_de_pecas, int &numero_de_seccoes, seccao *&armazem,int* &numeros_saidos,int &tamanho_dos_numeros_saidos,int &tamanho_da_lista_de_chegada){
     for (int index = 0; index < quantidade_de_pecas; index++){
         int a = rand()%numero_de_seccoes;
         peca peca_criada = criarPeca_de_categoria_seccao(numeros_saidos,tamanho_dos_numeros_saidos,armazem[a].categoria);
