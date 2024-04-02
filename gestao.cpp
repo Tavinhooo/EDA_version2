@@ -145,53 +145,53 @@ void add_seccao( int &numero_de_seccoes, seccao *&armazem) {
 //3.7.1
 void imprimir_lista_pecas(seccao* seccoes, int numero_seccoes, peca* lista_chegada, int tamanho_lista_chegada) {
     int tamanho_total = 0;
-    for (int i = 0; i < numero_seccoes; ++i) {
-        tamanho_total += seccoes[i].quantidade_na_seccao;
+    for (int i = 0; i < numero_seccoes; ++i) { //loop que percorre todas as secções
+        tamanho_total += seccoes[i].quantidade_na_seccao; //adiciona a quantidade de peças em cada secção ao tamanho total
     }
-    tamanho_total += tamanho_lista_chegada;
-    peca* todas_pecas = new peca[tamanho_total];
-    int index = 0;
-    for (int i = 0; i < numero_seccoes; ++i) {
+    tamanho_total += tamanho_lista_chegada; //adiciona o tamanho da lista de chegada ao tamanho total
+    peca* todas_pecas = new peca[tamanho_total]; //aloca um array dinamico de peça com o tamanho total já calculado
+    int i = 0;
+    for (int i = 0; i < numero_seccoes; ++i) { //loops responsaveis por copiar todas as peças das secções para o array todas_pecas 
         for (int j = 0; j < seccoes[i].quantidade_na_seccao; ++j) {
-            todas_pecas[index++] = seccoes[i].pecas_aqui[j];
+            todas_pecas[i++] = seccoes[i].pecas_aqui[j];
         }
     }
-    for (int i = 0; i < tamanho_lista_chegada; ++i) {
-        todas_pecas[index++] = lista_chegada[i];
+    for (int i = 0; i < tamanho_lista_chegada; ++i) { //loop responsavel por copiar todas as peças da lista de chegada para o array todas_pecas
+        todas_pecas[i++] = lista_chegada[i];
     }
-    sort(todas_pecas, todas_pecas + tamanho_total, [](const peca& p1, const peca& p2) {
+    sort(todas_pecas, todas_pecas + tamanho_total, [](const peca& p1, const peca& p2) { //as peças são ordenadas por ordem alfabética da marca
         return p1.marca < p2.marca;
     });
     cout << "Lista de todas as pecas presentes no armazem, seccoes e lista de chegada (por ordem alfabetica da marca):" << endl;
-    for (int i = 0; i < tamanho_total; ++i) {
+    for (int i = 0; i < tamanho_total; ++i) { //loop que permite a impressão de todas as informações de todas as peças presentes no armazem, secções e lista de chegada
         cout << "- Marca: " << todas_pecas[i].marca << " | Categoria: " << todas_pecas[i].categoria << " | Preco: " << todas_pecas[i].preco << endl;
     }
-    delete[] todas_pecas;
+    delete[] todas_pecas; //liberta a memória alocada
 
 }
 //3.7.2
 void imprimir_lista_pecas_preco(seccao* seccoes, int numero_seccoes, peca* lista_chegada, int tamanho_lista_chegada) {
     int tamanho_total = 0;
-    for (int i = 0; i < numero_seccoes; ++i) {
-        tamanho_total += seccoes[i].quantidade_na_seccao;
+    for (int i = 0; i < numero_seccoes; ++i) { //loop que percorre todas as secções
+        tamanho_total += seccoes[i].quantidade_na_seccao; //adiciona a quantidade de peças em cada secção ao tamanho total
     }
-    tamanho_total += tamanho_lista_chegada;
-    peca* todas_pecas = new peca[tamanho_total];
-    int index = 0;
-    for (int i = 0; i < numero_seccoes; ++i) {
+    tamanho_total += tamanho_lista_chegada; //adiciona o tamanho da lista de chegada ao tamanho total
+    peca* todas_pecas = new peca[tamanho_total]; //aloca um array dinamico de peça com o tamanho total já calculado
+    int i = 0;
+    for (int i = 0; i < numero_seccoes; ++i) { //loops responsaveis por copiar todas as peças das secções para o array todas_pecas 
         for (int j = 0; j < seccoes[i].quantidade_na_seccao; ++j) {
-            todas_pecas[index++] = seccoes[i].pecas_aqui[j];
+            todas_pecas[i++] = seccoes[i].pecas_aqui[j];
         }
     }
-    for (int i = 0; i < tamanho_lista_chegada; ++i) {
-        todas_pecas[index++] = lista_chegada[i];
+    for (int i = 0; i < tamanho_lista_chegada; ++i) {  //loop responsavel por copiar todas as peças da lista de chegada para o array todas_pecas
+        todas_pecas[i++] = lista_chegada[i];
     }
-    sort(todas_pecas, todas_pecas + tamanho_total, [](const peca& p1, const peca& p2) {
+    sort(todas_pecas, todas_pecas + tamanho_total, [](const peca& p1, const peca& p2) { //as peças são ordenadas por preço (do mais barato para o mais caro)
         return p1.preco < p2.preco;
     });
     cout << "Lista de todas as pecas presentes no armazem, seccoes e lista de chegada (por precos):" << endl;
-    for (int i = 0; i < tamanho_total; ++i) {
+    for (int i = 0; i < tamanho_total; ++i) { //loop que permite a impressão de todas as informações de todas as peças presentes no armazem, secções e lista de chegada
         cout << "- Marca: " << todas_pecas[i].marca << " | Categoria: " << todas_pecas[i].categoria << " | Preco: " << todas_pecas[i].preco << endl;
     }
-    delete[] todas_pecas;
+    delete[] todas_pecas; //liberta a memória alocada 
 }
